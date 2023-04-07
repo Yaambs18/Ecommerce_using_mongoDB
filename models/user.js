@@ -10,7 +10,7 @@ class User {
   save() {
     const db = getDb();
     return db
-      .collections("users")
+      .collection("users")
       .insertOne(this)
       .then((result) => {
         console.log(result);
@@ -23,11 +23,12 @@ class User {
   static findById(userId) {
     const db = getDb();
     return db
-      .collections("users")
+      .collection("users")
       .find({ _id: new mongodb.ObjectId(userId)})
       .next()
-      .then((result) => {
-        console.log(result);
+      .then((user) => {
+        console.log(user);
+        return user;
       })
       .catch((err) => {
         console.log(err);
